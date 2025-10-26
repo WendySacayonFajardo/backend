@@ -1,6 +1,3 @@
-// ===============================
-// Importar dependencias
-// ===============================
 import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -15,21 +12,21 @@ dotenv.config();
 // ===============================
 // Importar middlewares y rutas
 // ===============================
-import middlewares from '../middlewares/index.js';
-import usuarioRoutes from '../routes/usuarioRoutes.js';
-import verificacionRoutes from '../routes/verificacionRoutes.js';
-import productosRoutes from '../routes/productosRoutes.js';
-import categoriasRoutes from '../routes/categoriasRoutes.js';
-import carritoRoutes from '../routes/carritoRoutes.js';
-import serviciosRoutes from '../routes/serviciosRoutes.js';
-import uploadRoutes from '../routes/uploadRoutes.js';
-import clienteRoutes from '../routes/clienteRoutes.js';
-import productoReportesRoutes from '../routes/productoReportesRoutes.js';
-import inventarioRoutes from '../routes/inventarioRoutes.js';
-import servicioReportesRoutes from '../routes/servicioReportesRoutes.js';
-import logsRoutes from '../routes/logsRoutes.js';
-import citasRoutes from '../routes/citasRoutes.js';
-import ventasRoutes from '../routes/ventasRoutes.js';
+import middlewares from './middlewares/index.js';
+import usuarioRoutes from './routes/usuarioRoutes.js';
+import verificacionRoutes from './routes/verificacionRoutes.js';
+import productosRoutes from './routes/productosRoutes.js';
+import categoriasRoutes from './routes/categoriasRoutes.js';
+import carritoRoutes from './routes/carritoRoutes.js';
+import serviciosRoutes from './routes/serviciosRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import clienteRoutes from './routes/clienteRoutes.js';
+import productoReportesRoutes from './routes/productoReportesRoutes.js';
+import inventarioRoutes from './routes/inventarioRoutes.js';
+import servicioReportesRoutes from './routes/servicioReportesRoutes.js';
+import logsRoutes from './routes/logsRoutes.js';
+import citasRoutes from './routes/citasRoutes.js';
+import ventasRoutes from './routes/ventasRoutes.js';
 
 // ===============================
 // Crear instancia de Express
@@ -116,7 +113,11 @@ app.post('/api/auth/admin-login', async (req, res) => {
     const adminPassword = 'password';
 
     if (email === adminEmail && password === adminPassword) {
-      const token = jwt.sign({ id: 1, email: adminEmail, rol: 'admin' }, process.env.JWT_SECRET || 'salon_sandra_secret_key', { expiresIn: '24h' });
+      const token = jwt.sign(
+        { id: 1, email: adminEmail, rol: 'admin' },
+        process.env.JWT_SECRET || 'salon_sandra_secret_key',
+        { expiresIn: '24h' }
+      );
 
       return res.json({
         success: true,
@@ -156,10 +157,10 @@ app.use('/api/clientes', clienteRoutes);
 // ===============================
 app.listen(PORT, () => {
   console.log(`🚀 Servidor Backend corriendo en el puerto ${PORT}`);
-console.log(`📱 API disponible en /api`);
-console.log(`🔧 Entorno: ${process.env.NODE_ENV || 'development'}`);
-console.log(`✅ Usuario administrador: admin@nuevatienda.com`);
-console.log(`🔑 Contraseña: password`)
+  console.log(`📱 API disponible en /api`);
+  console.log(`🔧 Entorno: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`✅ Usuario administrador: admin@nuevatienda.com`);
+  console.log(`🔑 Contraseña: password`);
 });
 
 // ===============================
