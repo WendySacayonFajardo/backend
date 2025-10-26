@@ -13,20 +13,20 @@ dotenv.config();
 // Importar middlewares y rutas
 // ===============================
 import middlewares from './middlewares/index.js';
-import usuarioRoutes from './routes/usuarioRoutes.js';
-import verificacionRoutes from './routes/verificacionRoutes.js';
-import productosRoutes from './routes/productosRoutes.js';
-import categoriasRoutes from './routes/categoriasRoutes.js';
-import carritoRoutes from './routes/carritoRoutes.js';
-import serviciosRoutes from './routes/serviciosRoutes.js';
-import uploadRoutes from './routes/uploadRoutes.js';
-import clienteRoutes from './routes/clienteRoutes.js';
-import productoReportesRoutes from './routes/productoReportesRoutes.js';
-import inventarioRoutes from './routes/inventarioRoutes.js';
-import servicioReportesRoutes from './routes/servicioReportesRoutes.js';
-import logsRoutes from './routes/logsRoutes.js';
-import citasRoutes from './routes/citasRoutes.js';
-import ventasRoutes from './routes/ventasRoutes.js';
+import usuarioRoutes from './backend/routes/usuarioRoutes.js';
+import verificacionRoutes from './backend/routes/verificacionRoutes.js';
+import productosRoutes from './backend/routes/productosRoutes.js';
+import categoriasRoutes from './backend/routes/categoriasRoutes.js';
+import carritoRoutes from './backend/routes/carritoRoutes.js';
+import serviciosRoutes from './backend/routes/serviciosRoutes.js';
+import uploadRoutes from './backend/routes/uploadRoutes.js';
+import clienteRoutes from './backend/routes/clienteRoutes.js';
+import productoReportesRoutes from './backend/routes/productoReportesRoutes.js';
+import inventarioRoutes from './backend/routes/inventarioRoutes.js';
+import servicioReportesRoutes from './backend/routes/servicioReportesRoutes.js';
+import logsRoutes from './backend/routes/logsRoutes.js';
+import citasRoutes from './backend/routes/citasRoutes.js';
+import ventasRoutes from './backend/routes/ventasRoutes.js';
 
 // ===============================
 // Crear instancia de Express
