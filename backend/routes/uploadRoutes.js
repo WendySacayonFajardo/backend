@@ -1,7 +1,7 @@
 // Rutas para subir imágenes de productos
 import express from 'express';
 const router = express.Router();
-import { uploadImages, processUploadedImages } from '../middlewares/uploadMiddleware.js';
+import { uploadImages, processUploadedImages } from '../../middlewares/uploadMiddleware.js';
 import ProductoModel from '../models/productoModel.js';
 
 // POST /api/upload/producto/:id - Subir imágenes para un producto específico
