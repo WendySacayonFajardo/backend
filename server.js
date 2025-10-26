@@ -45,8 +45,9 @@ app.use(middlewares.security.helmetConfig);
 app.use(
   cors({
     origin: [
-      'https://pg-frontend-five.vercel.app', // tu dominio en Vercel
-      'http://localhost:5173',               // desarrollo local
+      'https://pg-frontend-crfg.vercel.app', // ✅ dominio actual del frontend en Vercel
+      'https://pg-frontend-five.vercel.app', // opcional: si aún usas este
+      'http://localhost:5173',               // para desarrollo local
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
