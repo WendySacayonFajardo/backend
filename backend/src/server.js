@@ -155,11 +155,11 @@ app.use('/api/clientes', clienteRoutes);
 // INICIALIZACIÓN DEL SERVIDOR
 // ===============================
 app.listen(PORT, () => {
-  console.log(🚀 Servidor Backend corriendo en el puerto ${PORT});
-  console.log(📱 API disponible en /api);
-  console.log(🔧 Entorno: ${process.env.NODE_ENV || 'development'});
-  console.log('✅ Usuario administrador: admin@nuevatienda.com');
-  console.log('🔑 Contraseña: password');
+  console.log('🚀 Servidor Backend corriendo en el puerto ${PORT}');
+console.log('📱 API disponible en /api');
+console.log('🔧 Entorno: ${process.env.NODE_ENV || 'development'}');
+console.log('✅ Usuario administrador: admin@nuevatienda.com');
+console.log('🔑 Contraseña: password')
 });
 
 // ===============================
