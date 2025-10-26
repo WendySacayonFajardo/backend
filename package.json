@@ -1,0 +1,39 @@
+{
+  "name": "nueva-tienda",
+  "version": "1.0.0",
+  "description": "Tienda en línea profesional con React, Node.js y Vite",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node start.js",
+    "start": "npm run dev",
+    "dev:simple": "concurrently --kill-others --prefix-colors \"bgBlue.bold,cyan\" \"npm run server\" \"npm run client\"",
+    "dev:win": "start.bat",
+    "dev:ps": "powershell -ExecutionPolicy Bypass -File start.ps1",
+    "server": "cd backend; npm run dev",
+    "client": "cd frontend; npm run dev",
+    "install-all": "npm install; cd backend; npm install; cd ../frontend; npm install",
+    "build": "cd frontend; npm run build",
+    "build:backend": "cd backend; npm run build",
+    "test": "cd backend; npm test; cd ../frontend; npm test",
+    "test:frontend": "cd frontend; npm test",
+    "test:backend": "cd backend; npm test",
+    "lint": "cd frontend; npm run lint",
+    "clean": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "reset": "npm run clean; npm run install-all"
+  },
+  "keywords": [
+    "tienda",
+    "ecommerce",
+    "react",
+    "nodejs",
+    "vite"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
