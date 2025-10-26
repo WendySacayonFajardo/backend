@@ -6,7 +6,9 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import mysql from 'mysql2/promise';
 
-// Configuración de dotenv solo en desarrollo
+// ===============================
+// CONFIGURACIÓN INICIAL
+// ===============================
 dotenv.config();
 
 // ===============================
@@ -38,18 +40,37 @@ const PORT = process.env.PORT || 4000;
 // CONFIGURACIÓN DE MIDDLEWARES
 // ===============================
 app.use(middlewares.security.helmetConfig);
-app.use(cors(middlewares.security.corsConfig));
+
+// ✅ Configuración CORS explícita
+app.use(
+  cors({
+    origin: [
+      'https://pg-frontend-five.vercel.app', // tu dominio en Vercel
+      'http://localhost:5173',               // desarrollo local
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+);
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use('/uploads', express.static(path.join(path.resolve(), 'uploads'), {
-  setHeaders: (res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-  }
-}));
+
+// ✅ Archivos estáticos (uploads)
+app.use(
+  '/uploads',
+  express.static(path.join(path.resolve(), 'uploads'), {
+    setHeaders: (res) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+    },
+  })
+);
+
 app.use(middlewares.security.sanitizeInput);
 
 // ===============================
@@ -63,16 +84,16 @@ const db = mysql.createPool({
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 // Test de conexión al iniciar
 db.getConnection()
-  .then(conn => {
+  .then((conn) => {
     console.log('✅ Conectado a MySQL correctamente');
     conn.release();
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('❌ Error conectando a MySQL:', err);
   });
 
@@ -96,8 +117,8 @@ app.get('/', (req, res) => {
       auth: '/api/auth',
       admin: '/api/admin',
       citas: '/api/citas',
-      stock: '/api/stock'
-    }
+      stock: '/api/stock',
+    },
   });
 });
 
@@ -107,7 +128,10 @@ app.get('/', (req, res) => {
 app.post('/api/auth/admin-login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ success: false, mensaje: 'Email y contraseña son requeridos' });
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ success: false, mensaje: 'Email y contraseña son requeridos' });
 
     const adminEmail = 'admin@nuevatienda.com';
     const adminPassword = 'password';
@@ -123,14 +147,18 @@ app.post('/api/auth/admin-login', async (req, res) => {
         success: true,
         mensaje: 'Login exitoso',
         token,
-        usuario: { id: 1, email: adminEmail, nombre: 'Administrador', rol: 'admin' }
+        usuario: { id: 1, email: adminEmail, nombre: 'Administrador', rol: 'admin' },
       });
     } else {
-      return res.status(401).json({ success: false, mensaje: 'Credenciales incorrectas' });
+      return res
+        .status(401)
+        .json({ success: false, mensaje: 'Credenciales incorrectas' });
     }
   } catch (error) {
     console.error('❌ Error en login de admin:', error);
-    return res.status(500).json({ success: false, mensaje: 'Error interno del servidor' });
+    return res
+      .status(500)
+      .json({ success: false, mensaje: 'Error interno del servidor' });
   }
 });
 
